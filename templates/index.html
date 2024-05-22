@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Networking Tool</title>
+</head>
+<body>
+    <h1>Networking Message Generator</h1>
+    <form action="/" method="post">
+        <input type="text" name="name" placeholder="Name" required><br>
+        <input type="text" name="company" placeholder="Company" required><br>
+        <input type="text" name="experience" placeholder="Experience" required><br>
+        <input type="text" name="alumni" placeholder="Alumni"><br>
+        <input type="number" name="age" placeholder="Age"><br>
+        <select name="intent" required>
+            <option value="asking for advice">Asking for Advice</option>
+            <option value="asking for opportunities">Asking for Opportunities</option>
+            <option value="asking for referral">Asking for Referral</option>
+        </select><br>
+        <button type="submit">Generate Message</button>
+    </form>
+    <p>Generated Message:</p>
+    <textarea rows="4" cols="50">{{ message }}</textarea>
+</body>
+</html>
