@@ -11,6 +11,31 @@ AutoOutreach is a collection of micro-apps designed to automate the outreach pro
 3. **Outreach Bot** - Automates LinkedIn outreach using Playwright
 4. **WebUI** - Optional Next.js dashboard for monitoring and configuration
 
+## Key Features
+
+- **Targeted Company Identification**: Automatically discover recently funded startups in specific geographic locations
+- **Decision Maker Extraction**: Identify key executives like CEOs, CTOs, and VPs based on their roles
+- **Contact Enrichment**: Find email addresses and social profiles for decision makers
+- **Automated Outreach**: Send personalized connection requests and follow-up messages on LinkedIn
+- **Performance Tracking**: Monitor campaign results and optimize your approach
+
+## Pipeline Architecture
+
+```
+┌───────────┐    ┌───────────┐    ┌───────────┐    ┌───────────┐
+│           │    │           │    │           │    │           │
+│ Collector ├───►│ Enricher  ├───►│ Outreach  │◄───┤  WebUI    │
+│           │    │           │    │   Bot     │    │           │
+└─────┬─────┘    └─────┬─────┘    └─────┬─────┘    └─────┬─────┘
+      │                │                │                │
+      ▼                ▼                ▼                ▼
+┌─────────────────────────────────────────────────────────────┐
+│                                                             │
+│                        Database                             │
+│                                                             │
+└─────────────────────────────────────────────────────────────┘
+```
+
 ## Project Structure
 
 ```
@@ -75,12 +100,26 @@ AutoOutreach/
 
 ## Usage
 
-### Collector
+### Collector: Finding Companies & Decision Makers
+
+The Collector module identifies recently funded companies and their key decision makers:
 
 ```bash
-cd apps/collector
-python -m collector --config ../../configs/dev/collector.yaml
+# Run with default settings
+python -m collector
+
+# Filter by specific locations
+python -m collector --target-locations "San Francisco" "New York" "London"
+
+# Set a custom date range
+python -m collector --start-date 2023-01-01 --end-date 2023-03-31
 ```
+
+The collector will:
+1. Fetch data from Crunchbase and SEC filings
+2. Filter companies by your target locations
+3. Extract key decision makers (founders, C-level, VPs)
+4. Save both raw and processed data for enrichment
 
 ### Enricher
 
