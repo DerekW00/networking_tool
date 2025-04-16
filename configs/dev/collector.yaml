@@ -13,6 +13,17 @@ sources:
       - 10-K
       - 10-Q
 
+# Target locations for filtering
+target_locations:
+  - "San Francisco"
+  - "New York"
+  - "Boston"
+  - "Austin"
+  - "Seattle"
+  - "London"
+  - "Berlin"
+  - "Tel Aviv"
+
 # API Keys (use environment variables in production)
 crunchbase_api_key: ${CRUNCHBASE_API_KEY}
 sec_user_agent: "AutoOutreach 1.0 (development)"
@@ -21,7 +32,20 @@ sec_user_agent: "AutoOutreach 1.0 (development)"
 collection:
   max_days_per_run: 30
   rate_limit_delay: 1.0  # seconds between API requests
+  min_funding_amount: 500000  # Only include companies with funding >= $500k
 
 # Output settings
 output_dir: "../../data/raw"
-file_format: "csv" 
+interim_dir: "../../data/interim"
+file_format: "csv"
+
+# Decision maker extraction settings
+decision_makers:
+  min_roles_per_company: 1
+  target_roles:
+    - "ceo"
+    - "cto"
+    - "cfo"
+    - "founder"
+    - "vp_engineering"
+    - "vp_product" 
