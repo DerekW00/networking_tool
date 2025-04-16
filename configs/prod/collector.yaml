@@ -1,0 +1,32 @@
+# Production configuration for collector app
+
+# Data sources
+sources:
+  crunchbase:
+    enabled: true
+    api_version: 4
+  sec:
+    enabled: true
+    target_forms:
+      - S-1
+      - S-1/A
+      - 10-K
+      - 10-Q
+
+# API Keys (loaded from environment variables)
+crunchbase_api_key: ${CRUNCHBASE_API_KEY}
+sec_user_agent: "AutoOutreach 1.0 (production@example.com)"
+
+# Collection parameters
+collection:
+  max_days_per_run: 7  # More frequent runs in production
+  rate_limit_delay: 2.0  # More conservative API rate limiting
+
+# Output settings
+output_dir: "/data/autooutreach/raw"  # Absolute path in production
+file_format: "csv"
+
+# Logging
+logging:
+  level: "INFO"
+  file: "/var/log/autooutreach/collector.log" 

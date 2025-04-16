@@ -1,0 +1,27 @@
+# Development configuration for collector app
+
+# Data sources
+sources:
+  crunchbase:
+    enabled: true
+    api_version: 4
+  sec:
+    enabled: true
+    target_forms:
+      - S-1
+      - S-1/A
+      - 10-K
+      - 10-Q
+
+# API Keys (use environment variables in production)
+crunchbase_api_key: ${CRUNCHBASE_API_KEY}
+sec_user_agent: "AutoOutreach 1.0 (development)"
+
+# Collection parameters
+collection:
+  max_days_per_run: 30
+  rate_limit_delay: 1.0  # seconds between API requests
+
+# Output settings
+output_dir: "../../data/raw"
+file_format: "csv" 
